@@ -258,7 +258,7 @@ Ensure you have `ffmpeg` installed on your system for audio processing capabilit
 
 ### 2. Installation
 ```bash
-git clone [https://github.com/KKaur170/Pathos-AI.git](https://github.com/KKaur170/Pathos-AI.git)
+git clone https://github.com/KKaur170/Pathos-AI.git
 cd Pathos-AI
 pip install -r requirements.txt
 ```
