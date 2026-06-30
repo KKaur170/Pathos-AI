@@ -3,7 +3,6 @@
 # ✨ Pathos AI: Multimodal Emotion Recognition for Indic Languages
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)
-![PyTorch](https://img.shields.io/badge/PyTorch-Deep_Learning-EE4C2C?logo=pytorch&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?logo=streamlit&logoColor=white)
 
 **Pathos AI** is a multimodal emotion recognition framework engineered to provide inclusive, emotion-aware AI for Indic languages. By fusing high-fidelity acoustic signal processing with semantic transformer-based embeddings, the platform enables precise emotional state classification in **Malayalam** and **Punjabi**.
