@@ -64,7 +64,7 @@ Pathos AI transforms raw audio data into structured emotional intelligence. By r
 
 ##  Engineering Highlights
 
-### 1️ Malayalam – Multimodal Fusion Pipeline
+### 1️. Malayalam – Multimodal Fusion Pipeline
 
 The Malayalam pipeline combines **semantic understanding** with **acoustic information** to improve emotion recognition.
 
@@ -98,7 +98,7 @@ Low-confidence predictions are rejected, improving prediction reliability.
 
 ---
 
-### 2️ Punjabi – Prosodic & Voice-Quality Pipeline
+### 2️. Punjabi – Prosodic & Voice-Quality Pipeline
 
 Instead of relying on textual information, the Punjabi pipeline focuses on **speech production characteristics**.
 
@@ -134,7 +134,7 @@ Manual class weights are incorporated to address class imbalance and improve min
 
 ---
 
-### 3️ Production-Ready Inference Engine
+### 3️. Production-Ready Inference Engine
 
 The application is designed for efficient real-time deployment.
 
