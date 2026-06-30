@@ -18,7 +18,21 @@
 
 ---
 
-## 🔬 Engineering Highlights
+##  Real-World Impact (Why This Matters)
+Mainstream voice assistants remain largely English-centric and emotion-blind, creating a significant accessibility gap for millions of Indic language speakers.
+
+Pathos AI transforms raw audio data into structured emotional intelligence. By replacing generic, one-size-fits-all models with specialized domain-specific architectures for Malayalam and Punjabi, this system enables more natural, empathetic, and inclusive human-computer interactions.
+
+###  Approach Comparison
+| Approach | Limitation | Pathos AI's Solution |
+| :--- | :--- | :--- |
+| **Standard SER Models** | Blind to linguistic context; ignore semantic cues. | Multimodal fusion (Text BERT + Acoustic Features). |
+| **Generic Classifiers** | Struggle with long-tail minority emotion classes. | Custom synthetic augmentation & Margin-based logic. |
+| **Black-box Argmax** | Forces predictions even on low-confidence samples. | Margin-based decision thresholding for high-reliability outputs. |
+
+---
+
+##  Engineering Highlights
 
 ### 1. Distinct Pipeline Architectures
 Pathos AI employs two specialized processing engines based on the specific linguistic and data needs of each language:
@@ -32,11 +46,9 @@ Pathos AI employs two specialized processing engines based on the specific lingu
     Labels are only accepted if they meet the margin requirement, significantly reducing misclassifications in low-confidence samples.
 * **Feature Optimization:** We utilize **LGBM-based feature importance mapping** to retain only the most discriminative audio metrics, ensuring low-latency inference during real-time use.
 
-
-
 ---
 
-## 📊 Performance Insights
+##  Performance Insights
 
 | Pipeline | Model Architecture | Validation Accuracy |
 | :--- | :--- | :---: |
@@ -52,7 +64,7 @@ Pathos AI employs two specialized processing engines based on the specific lingu
 
 ---
 
-## 🚀 Setup & Usage
+##  Setup & Usage
 
 ### 1. Requirements
 Ensure you have `ffmpeg` installed on your system for audio processing capabilities.
@@ -71,5 +83,5 @@ streamlit run src/app.py
 
 ---
 
-## 📂 Repository Structure
+##  Repository Structure
 
