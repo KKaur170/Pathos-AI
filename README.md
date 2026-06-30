@@ -32,19 +32,116 @@ Pathos AI transforms raw audio data into structured emotional intelligence. By r
 
 ---
 
+--
+
 ##  Engineering Highlights
 
-### 1. Distinct Pipeline Architectures
-Pathos AI employs two specialized processing engines based on the specific linguistic and data needs of each language:
+### 1️ Malayalam – Multimodal Fusion Pipeline
 
-* **Malayalam (Multimodal):** Implements a **Voting Ensemble** (LightGBM, XGBoost, Random Forest). It fuses spectral acoustic features (`MFCC`, `Chroma`) with 384-dimensional semantic embeddings from `bert-base-multilingual-cased`.
-* **Punjabi (Acoustic-Prosodic):** Implements a **Stacking Ensemble** (LightGBM, CatBoost, Random Forest). It focuses on fine-grained phonatory metrics—specifically `F0` (pitch), `Jitter`, `Shimmer`, and `HNR`—extracted via `Praat/Parselmouth`.
+The Malayalam pipeline combines **semantic understanding** with **acoustic information** to improve emotion recognition.
 
-### 2. Decision Engine & Robustness
-* **Margin-Based Thresholding:** Unlike standard `argmax` classifiers prone to error in imbalanced scenarios, our custom `apply_margin_logic` evaluates prediction confidence against dynamic thresholds:
-    `margin = probability - threshold`
-    Labels are only accepted if they meet the margin requirement, significantly reducing misclassifications in low-confidence samples.
-* **Feature Optimization:** We utilize **LGBM-based feature importance mapping** to retain only the most discriminative audio metrics, ensuring low-latency inference during real-time use.
+#### Semantic Integration
+
+- Uses **bert-base-multilingual-cased** to generate contextual text embeddings.
+- Captures the semantic meaning of spoken content.
+
+#### Acoustic Features
+
+Extracts multiple speech descriptors including:
+
+- MFCC
+- Chroma
+- Tonnetz
+- Spectral Contrast
+
+#### Fusion Strategy
+
+Text embeddings are concatenated with acoustic features and passed into a **Soft Voting Ensemble** for final prediction.
+
+#### Confidence-based Decision Layer
+
+A custom **Margin-based Thresholding** strategy evaluates:
+
+```
+(probability − threshold)
+```
+
+Low-confidence predictions are rejected, improving prediction reliability.
+
+---
+
+### 2️ Punjabi – Prosodic & Voice-Quality Pipeline
+
+Instead of relying on textual information, the Punjabi pipeline focuses on **speech production characteristics**.
+
+#### Parselmouth/Praat Features
+
+Specialized voice-quality metrics include:
+
+- Fundamental Frequency (F0)
+- F0 Slope
+- Jitter (Local)
+- Shimmer (Local)
+- Harmonics-to-Noise Ratio (HNR)
+
+These physiological speech properties help capture emotional variations.
+
+#### Stacking Ensemble
+
+Base Models:
+
+- LightGBM
+- CatBoost
+- Random Forest
+
+Meta Learner:
+
+- Logistic Regression
+
+The stacking strategy combines predictions from multiple classifiers to improve generalization.
+
+#### Class Weight Calibration
+
+Manual class weights are incorporated to address class imbalance and improve minority class recognition.
+
+---
+
+### 3️ Production-Ready Inference Engine
+
+The application is designed for efficient real-time deployment.
+
+#### Universal Prediction Pipeline
+
+`app.py` automatically routes incoming audio to the correct prediction pipeline based on the selected language.
+
+#### Audio Normalization
+
+Incoming audio is standardized using:
+
+- FFmpeg
+- Pydub
+
+Supported formats:
+
+- WAV
+- MP3
+- WebM
+
+All files are converted to:
+
+- 16 kHz
+- Mono channel
+
+for consistent feature extraction.
+
+#### Efficient Model Loading
+
+To minimize latency:
+
+- `st.cache_resource` caches trained models.
+- `joblib` loads serialized ensemble checkpoints.
+
+This enables **sub-second inference** during repeated predictions.
 
 ---
 
@@ -61,6 +158,68 @@ Pathos AI employs two specialized processing engines based on the specific lingu
   <img src="assets/confusion_matrix_pun.png" width="45%" alt="Punjabi Confusion Matrix">
   <img src="assets/correlation_heatmap_mal.png" width="45%" alt="Malayalam Heatmap">
 </div>
+
+---
+
+##  Technology Stack
+
+### Machine Learning
+
+- PyTorch
+- LightGBM
+- CatBoost
+- Scikit-learn
+
+### NLP
+
+- Hugging Face Transformers
+- bert-base-multilingual-cased
+- SentenceTransformers
+
+### Audio Processing
+
+- Librosa
+- Praat-Parselmouth
+- Pydub
+- FFmpeg
+
+### Deployment
+
+- Streamlit
+- Joblib
+
+---
+
+##  Project Structure
+
+```
+Pathos-AI/
+│
+├── src/
+│   ├── app.py
+│
+├── notebooks/
+|   ├── 01_EDA_and_Visualization.ipynb
+|   ├── 02_EDA_Malayalam.ipynb
+|   ├── 03_Punjabi_Pipeline_Training.ipynb
+|   ├── 04_Malayalam_Pipeline_Training.ipynb
+│
+├── assets/
+|   ├── classification_report_mal.png
+|   ├── classification_report_pun.png
+|   ├── confusion_matrix_pun.png
+|   ├── correlation_heatmap_mal.png
+|   ├── data_insights_pun.png
+|   ├── pathos_ai_dash_mal.png
+|   ├── pathos_ai_dash_pun.png   
+|   ├── results_mal.png
+│
+├── requirements.txt
+│
+├── README.md
+│
+└── LICENSE
+```
 
 ---
 
@@ -83,5 +242,47 @@ streamlit run src/app.py
 
 ---
 
-##  Repository Structure
+##  Supported Audio Formats
 
+- WAV
+- MP3
+- WebM
+
+All uploaded files are automatically normalized before inference.
+
+---
+
+##  Predicted Emotion Classes
+
+Depending on the selected language and trained model, the system predicts emotions such as:
+
+-  Happy
+-  Sad
+-  Anger
+-  Fear
+-  Neutral
+
+---
+
+##  Future Improvements
+
+- Support for additional Indian languages
+- Transformer-based multimodal fusion
+- Explainable AI (XAI) visualizations
+- Mobile-friendly deployment
+- ONNX optimization for edge deployment
+
+---
+
+##  Author & AI Architect
+
+**Khushnoor Kaur** 
+
+*B.E. Computer Engineering | Thapar Institute of Engineering and Technology*
+
+**Let's Connect:** [GitHub](https://github.com/KKaur170) | [LinkedIn](https://www.linkedin.com/in/khushnoor-kaur-bb7684345/)
+
+---
+
+##  License & Acknowledgements
+This project is intended for academic and research purposes.
