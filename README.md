@@ -32,7 +32,35 @@ Pathos AI transforms raw audio data into structured emotional intelligence. By r
 
 ---
 
---
+##  System Architecture
+
+```
+                  User Audio
+                      │
+                      ▼
+             Audio Normalization
+        (FFmpeg + Pydub → 16kHz Mono)
+                      │
+                      ▼
+              Language Selection
+          ┌────────────────────────┐
+          │                        │
+          ▼                        ▼
+ Malayalam Pipeline         Punjabi Pipeline
+          │                        │
+          ▼                        ▼
+ Feature Extraction        Feature Extraction
+(Text + Audio Fusion)     (Prosodic Features)
+          │                        │
+          ▼                        ▼
+ Ensemble Prediction      Stacking Prediction
+          │                        │
+          └──────────┬─────────────┘
+                     ▼
+             Emotion Prediction
+```
+
+---
 
 ##  Engineering Highlights
 
